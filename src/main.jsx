@@ -1,64 +1,24 @@
-import { StrictMode, useState } from "react";
-import { createRoot } from "react-dom/client";
-
-const videos = [
-  { title: "video 1", src: "test0.wav" },
-  { title: "video 2", src: "test.wav" },
-];
-
-function search(query) {
-    let filteredVideos = []
-
-    if (query != ""){
-        filteredVideos = videos.filter(video =>
-            video.title.toLowerCase().includes(query.toLowerCase())
-        );
-    }
-
-    return filteredVideos;
-}
+import LandingPage from "./Pages/LandingPage/LandingPage.jsx";
+import SearchPage from "./Pages/SearchPage/SearchPage.jsx"
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import "./index.css"
 
 function App() {
-    const [searchText, setSearchText] = useState("");
-    const [enterPressed, setEnterPressed] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
-
-    let filteredVideos = [];
-    if (enterPressed) {
-        filteredVideos = search(searchQuery);
-    }
-
-    return (
-        <>
-        <input
-            type="text"
-            placeholder="Search videos..."
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                    setSearchQuery(searchText);
-                    setEnterPressed(true);
-                }
-            }}
-        />
-
-        {filteredVideos.length === 0 && enterPressed && (
-            <p>No videos found.</p>
-        )}
-
-        {filteredVideos.map((video, index) => (
-            <div key={index} className="video">
-            <h2 className="video-title">{video.title}</h2>
-            <p>{video.src}</p>
-            </div>
-        ))}
-        </>
-    );
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage/>} />
+      <Route path="/Search" element={<SearchPage/>} />
+    </Routes>
+  );
 }
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
 );

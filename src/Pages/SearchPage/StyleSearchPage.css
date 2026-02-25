@@ -1,0 +1,36 @@
+#video-grid {
+}
+
+.video {
+  width: 361px;
+  height: 163px;
+  margin: 20px;
+  cursor: pointer;
+  display: flex;
+}
+.thumbnail {
+  width: 238px;
+  height: 163px;
+  background-color: #585b70;
+  border-radius: 16px;
+  margin-right: 15px;
+}
+.video-text {
+  margin-top: 10px;
+}
+.video-text h3 {
+  margin: 0;
+  font-size: 24px;
+  color: #cdd6f4;
+  font-weight: 500;
+}
+.creator {
+  margin: 4px 0;
+  color: #bac2de;
+  font-size: 14px;
+}
+.meta {
+  margin: 0;
+  color: #bac2de;
+  font-size: 13px;
+}

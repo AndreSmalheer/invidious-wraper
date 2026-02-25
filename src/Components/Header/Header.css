@@ -1,0 +1,20 @@
+.Header {
+    color: white;
+    width: 100vw;
+    background-color: #1E1E2E;
+    box-sizing: border-box;
+    height: clamp(60px, 5vw, 52px);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.Header h1 {
+    margin-left: clamp(10px, 2vw, 21px);
+    color: #CDD6F4;
+
+    &:hover{
+        cursor: pointer;
+        color: #E6E9FF;
+    }
+}
