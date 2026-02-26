@@ -6,14 +6,24 @@ import "./StyleSearchPage.css"
 
 const invidiousUrl = "http://100.100.22.66:3000"
 
-async function search(query) {
-    const params = { q: query };
-    const url = new URL("http://100.100.22.66:3000/api/v1/search");
+async function search(query, page) {
+    let params;
+
+    params = { q: query, 'page': page};
+    const url = new URL(`${invidiousUrl}/api/v1/search`);
     url.search = new URLSearchParams(params).toString();
 
     const response = await fetch(url);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
+
+    const paramsNext = {q: query, 'page': page + 1};
+    const urlNext = new URL(`${invidiousUrl}/api/v1/search`);
+    urlNext.search = new URLSearchParams(paramsNext).toString();
+
+    const responseNext = await fetch(urlNext);
+    if (!responseNext.ok) throw new Error(`HTTP error! status: ${responseNext.status}`);
+    const dataNext = await responseNext.json();
 
     let content;
 
@@ -23,6 +33,7 @@ async function search(query) {
         content = []
 
         for (const item of data){
+            // Video
             if(item.type == 'video'){
                 const videoThumbnail = `${invidiousUrl}${item.videoThumbnails[0].url}`
 
@@ -37,6 +48,16 @@ async function search(query) {
                         </div>
                     </div>
                 )
+            }
+
+            // Channel
+            if(item.type == 'channel'){
+                console.log('Channel item:', item);
+            }
+
+            // Playlist
+            if(item.type == 'playlist'){
+                console.log('Playlist item:', item);
             }
         }
     }
@@ -72,14 +93,14 @@ export default function SearchPage() {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const query = params.get("query") || "";
-
+    const page = Number(params.get("page") || 1);
     const [content, setContent] = useState();
 
     useEffect(() => {
         async function fetchResults() {
             setContent(<SkelotanGrid />)
 
-            const result = await search(query);
+            const result = await search(query, page);
             setContent(result);
         }
         fetchResults();
