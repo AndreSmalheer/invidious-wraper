@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./StyleSearchInput.css"
 
-export default function SearchInput({classname}) {
-  const [searchText, setSearchText] = useState("");
+export default function SearchInput({ classname, searchText: initialSearchText = "" }) {
+  const [searchText, setSearchText] = useState(initialSearchText);
   const [results, setResults] = useState([]);
   const navigate = useNavigate();
 

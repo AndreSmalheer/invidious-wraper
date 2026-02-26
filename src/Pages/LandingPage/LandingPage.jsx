@@ -6,7 +6,7 @@ export default function LandingPage() {
     return(
         <>
         <Header />
-        <SearchInput classname={"Search Big centered"}/>
+        <SearchInput classname={"Search Big centered-page"}/>
         </>
     )
 }

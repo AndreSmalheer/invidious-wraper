@@ -36,6 +36,12 @@
 }
 
 .centered{
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+    margin-top: 20px;
+}
+
+.centered-page{
     display: block;
     margin: 0 auto;
     position: absolute;
