@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import { search } from "../../utils/search";
 import SearchInput from "../../Components/SearchInput/SearchInput";
 import Header from "../../Components/Header/Header";
-import VideoCard from "../../Components/VideoGridCard/VideoCard";
-import SkeletonGrid from "../../Components/SkeletonGrid/SkeletonGrid";
+import VideoCard from "./VideoGridCard/VideoCard";
+import SkeletonGrid from "./SkeletonGrid/SkeletonGrid";
 import "./StyleSearchPage.css";
 
 export default function SearchPage() {
