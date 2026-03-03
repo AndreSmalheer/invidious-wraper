@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getVideoInfo } from "../../utils/GetVideoInfo";
 import Header from "../../Components/Header/Header";
 import "./VideoPage.css";
@@ -10,6 +10,8 @@ export default function VideoPage() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const video_id = params.get("video_id") || null;
+
+  const navigate = useNavigate()
 
   const [videoData, setVideoData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -155,7 +157,7 @@ export default function VideoPage() {
         <div className="recommended-videos">
           {videoData.recommendedVideos?.length > 0 ? (
             videoData.recommendedVideos.map((video) => (
-              <div key={video.videoId} className="recommended-video-card">
+                <div key={video.videoId} className="recommended-video-card" onClick={() => navigate(`/Video?video_id=${video.videoId}`)} >
                 <img className="recommended-video-thumbnail" src={invidous_url + video.videoThumbnails[0].url}></img>
                 <p className="recommended-video-title">{video.title}</p>
                 {/* <p className="recommended-video-id">{video.videoId}</p> */}
