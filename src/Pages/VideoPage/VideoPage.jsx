@@ -75,12 +75,30 @@ export default function VideoPage() {
     return () => {
         video.removeEventListener("timeupdate", updateProgress);
     };
-}, [videoData]);
+  }, [videoData]);
+
+  useEffect(() => {
+    const handleKey = (e) => {
+        if (e.key === "Escape") {
+            if (fulscreen) {
+                setFulscreen(false)
+            }
+        }
+    };
+
+    if(fulscreen){
+        document.addEventListener("keydown", handleKey);
+
+        return () => {
+            document.removeEventListener("keydown", handleKey);
+        };
+    }
+   }, [fulscreen]);
 
   if (loading) return <p>Loading...</p>;
   if (!videoData) return <p>Video not found</p>;
 
-  console.log(videoData);
+//   console.log(videoData);
 
   return (
     <>
