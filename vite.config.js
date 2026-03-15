@@ -10,9 +10,9 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "apple-touch-icon.png"],
       manifest: {
-        name: "My Vite React App",
-        short_name: "MyApp",
-        description: "My PWA built with Vite and React",
+        name: "OpenVideo",
+        short_name: "OpenVideo",
+        description: "OpenVideo Player",
         theme_color: "#ffffff",
         background_color: "#ffffff",
         display: "standalone",
