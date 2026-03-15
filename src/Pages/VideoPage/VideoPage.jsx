@@ -108,7 +108,9 @@ export default function VideoPage() {
         <div className="video-main-column">
           {videoData.formatStreams?.length > 0 && (
             <>
-              <div className={`video-container ${fulscreen? "fulscreen" : ""}`}>
+              <div
+                className={`video-container ${fulscreen ? "fulscreen" : ""}`}
+              >
                 <video
                   id="main-video"
                   className="main-video-player"
@@ -128,21 +130,58 @@ export default function VideoPage() {
                     className="fullscreen-btn"
                     src="/images/fullscreen.png"
                     onClick={() => setFulscreen(!fulscreen)}
-                   ></img>
+                  ></img>
 
                   <progress
                     className="video-progress"
                     value={progress}
                     max="100"
                     onClick={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const clickX = e.clientX - rect.left;
-                    const video = document.getElementById("main-video");
-                    if (video && video.duration) {
-                        video.currentTime = (clickX / rect.width) * video.duration;
-                    }
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      const clickX = e.clientX - rect.left;
+                      const video = document.getElementById("main-video");
+                      if (video && video.duration) {
+                        video.currentTime =
+                          (clickX / rect.width) * video.duration;
+                      }
                     }}
                   />
+                </div>
+
+                <div className="mobile-controls">
+                  <div className="mobile-center-controls">
+                    <img
+                      className="mobile-play-btn"
+                      src={playing ? "/images/pause.png" : "/images/play.png"}
+                      onClick={() => setPlaying(!playing)}
+                    />
+                  </div>
+
+                  <div className="mobile-controls">
+                    <progress
+                      className="mobile-video-progress"
+                      value={progress}
+                      max="100"
+                      onClick={(e) => {
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        const clickX = e.clientX - rect.left;
+                        const video = document.getElementById("main-video");
+
+                        if (video && video.duration) {
+                          video.currentTime =
+                            (clickX / rect.width) * video.duration;
+                        }
+                      }}
+                    />
+
+                    <div className="mobile-fulscreen-btn-container">
+                        <img
+                            className="mobile-fullscreen-btn"
+                            src="/images/fullscreen.png"
+                            onClick={() => setFulscreen(!fulscreen)}
+                        />
+                    </div>
+                 </div>
                 </div>
               </div>
             </>
@@ -154,11 +193,18 @@ export default function VideoPage() {
               <div className="author-info">
                 <img
                   className="author-thumbnail"
-                  src={videoData.authorThumbnails[0].url || "/images/default-author-thumbnail.svg"}
+                  src={
+                    videoData.authorThumbnails[0].url ||
+                    "/images/default-author-thumbnail.svg"
+                  }
                   alt={`${videoData.author} thumbnail`}
                 />
-                <h2 className="author-name">{videoData.author}</h2>
-                <h2 className="author-subCount">{videoData.subCountText}</h2>
+
+                <div className="author-details">
+                    <h2 className="author-name">{videoData.author}</h2>
+                    <h2 className="author-subCount">{videoData.subCountText}</h2>
+                </div>
+
               </div>
 
               <div className="like-dislike-container">
@@ -184,8 +230,15 @@ export default function VideoPage() {
         <div className="recommended-videos">
           {videoData.recommendedVideos?.length > 0 ? (
             videoData.recommendedVideos.map((video) => (
-                <div key={video.videoId} className="recommended-video-card" onClick={() => navigate(`/Video?video_id=${video.videoId}`)} >
-                <img className="recommended-video-thumbnail" src={invidous_url + video.videoThumbnails[0].url}></img>
+              <div
+                key={video.videoId}
+                className="recommended-video-card"
+                onClick={() => navigate(`/Video?video_id=${video.videoId}`)}
+              >
+                <img
+                  className="recommended-video-thumbnail"
+                  src={invidous_url + video.videoThumbnails[0].url}
+                ></img>
                 <p className="recommended-video-title">{video.title}</p>
                 {/* <p className="recommended-video-id">{video.videoId}</p> */}
               </div>
